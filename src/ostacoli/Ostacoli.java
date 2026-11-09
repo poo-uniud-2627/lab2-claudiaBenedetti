@@ -3,6 +3,7 @@
 package ostacoli;
 
 import geometria.Rettangolo;
+import java.util.ArrayList;
 import java.util.List;
 
 /** Gli ostacoli del campo: di tipi diversi, trattati tutti allo stesso modo. */
@@ -36,7 +37,11 @@ public class Ostacoli {
      *           esplosione a catena, non viene colpito di nuovo.
      */
     public void colpisciAttorno(Rettangolo zona) {
-        // scrivete qui
+        for (Ostacolo o : new ArrayList<>(ostacoli)) {
+            if (o.getArea().tocca(zona) && !o.isRotto()) {
+                o.colpisci(this);
+            }
+        }
     }
 
     /** Un passo del gioco per tutti gli ostacoli: quelli che si muovono si spostano. */
